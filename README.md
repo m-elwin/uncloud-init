@@ -4,8 +4,10 @@ Does not require cloud-init to be installed.
 
 Aims to complete all cloud-init tasks that subiquity assigns to cloud init for a *Desktop* Install.
 
-Based on some (uncareful)  source-code reading, the only required task for a minimal Desktop install is to
-1. Set up the username and password (based on the information subiquity provides to cloud init)
+Based on some (uncareful)  source-code reading, the only required task for a minimal Desktop install is to:
+1. Set the locale
+2. Set the timezone
+3. Set up the user and groups. 
 
 After completing all its tasks, this script deletes the cloud-init configuration created by subiquity and completely uninstalls itself.
 
