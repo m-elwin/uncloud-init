@@ -14,8 +14,8 @@ def flat_parse_yaml(yaml):
         yaml features so indendation is ignored and lists are parsed as single values
     """
     lines = yaml.splitlines()
-    keyvals = [line.lstrip().split(":") for line in lines if len(line) > 0]
-    return { keyval[0] : keyval[1] for keyval in keyvals if len(keyval) == 2}
+    keyvals = [line.lstrip(' -').split(":") for line in lines if len(line) > 0]
+    return { keyval[0] : keyval[1].lstrip() for keyval in keyvals if len(keyval) == 2}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -36,4 +36,15 @@ if __name__ == "__main__":
 
         # remove line continuation characters
         config = "".join(config_unescaped.split("\\"))
-        yaml_dict = flat_parse_yaml(config))
+        yaml_dict = flat_parse_yaml(config)
+        print(yaml_dict)
+
+        print(f"Setting timezone to {yaml_dict['timezone']}")
+        print(f"Setting locale to {yaml_dict['locale']}")
+
+        # For some reason "gecos" is the key under which the user's real name is stored
+        print("Creating User Account:")
+        print(f"  Full Name: {yaml_dict['gecos']}")
+        print(f"  Username: {yaml_dict['name']}")
+        print(f"  Groups: {yaml_dict['groups']}")
+        print(f"  Password Hash: {yaml_dict['passwd']}")
