@@ -46,7 +46,6 @@ if __name__ == "__main__":
         # remove line continuation characters
         config = "".join(config_unescaped.split("\\"))
         yaml_dict = flat_parse_yaml(config)
-        print(yaml_dict)
 
         print(f"Setting timezone to {yaml_dict['timezone']}")
         run_cmd(["timedatectl", "set-timezone", yaml_dict['timezone']])
@@ -65,4 +64,5 @@ if __name__ == "__main__":
             "--groups", yaml_dict['groups'],
             "--create-home",
             "--password", f"'{yaml_dict['passwd']}'",
+            yaml_dict['name']            
             ])
