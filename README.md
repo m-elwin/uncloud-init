@@ -34,3 +34,5 @@ never had those packages in the first place.  It's a tangled web, but cloud-init
 # Files:
 - test/99-installer.cfg: An example configuration file, used for testing
 - uncloud-init.service: Systemd unit to run the uncloud-init service
+- Makefile: Used to install the files to the system
+- debian/ the package directory. This package is only useful for an Ubuntu installation so it uses the (Debian Native Package Format)[https://www.debian.org/doc/manuals/debmake-doc/ch05.en.html#native]
