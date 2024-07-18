@@ -7,18 +7,15 @@
 
 import argparse
 
-def get_value(key, text):
-    """ Get the value of a yaml key in the cloud config file 
-    
-        key - the yaml key to lookup.
-        text - full text of the yaml file
-        
-        Assumes the value is immediately after the key, not on a newline. 
-        That assumption is valid for the particular yaml file this script parses.
+def flat_parse_yaml(yaml):
+    """ Return a dictionary of keys and values for yaml.
+
+        The file we work with do not meaningfully use lists or hierarchy or other
+        yaml features so indendation is ignored and lists are parsed as single values
     """
-    start = text.find(f"{key}: ") + len(f"{key}: ")
-    end   = start + text[start:].find("\n")
-    return text[start:end]
+    lines = yaml.splitlines()
+    keyvals = [line.lstrip().split(":") for line in lines if len(line) > 0]
+    return { keyval[0] : keyval[1] for keyval in keyvals if len(keyval) == 2}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -32,33 +29,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     with open(args.config) as config_file:
-        config = config_file.read()
+        config_raw = config_file.read()
         
-        # The userdata contains the information we need from the setup.
-        # It is written by subiquity
-        userdata_raw = config[config.find("userdata_raw:"):-1].split('"')[1]
-        # unescape the data
-        userdata_unescaped = userdata_raw.replace("\\n", "\n")
+        # unescape the literal newlines 
+        config_unescaped = config_raw.replace("\\n", "\n")
+
         # remove line continuation characters
-        userdata = "".join(userdata_unescaped.split("\\"))
-        print(f"userdata:\n{userdata}\n")
-        # Get the locale
-        locale = get_value("locale", userdata)
-        print(f"locale={locale}")
-        
-        # Get the timezone
-        timezone = get_value("timezone", userdata)
-        print(f"timezone={timezone}")
-    
-        # Get the user's full name
-        fullname = get_value("gecos", userdata)
-        print(f"fullname={fullname}")
-
-        # Get the groups the user should be in
-        groups =  get_value("groups", userdata)
-        print(f"groups={groups}")
-
-        # Get the user's username
-        user = get_value("name", userdata)
-        print(f"user={user}")
-        
+        config = "".join(config_unescaped.split("\\"))
+        yaml_dict = flat_parse_yaml(config))
