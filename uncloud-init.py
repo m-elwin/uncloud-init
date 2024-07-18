@@ -13,11 +13,16 @@ def flat_parse_yaml(yaml):
 
         The file we work with do not meaningfully use lists or hierarchy or other
         yaml features so indendation is ignored and lists are parsed as single values
+
+        Args:
+        yaml - A string containing yaml
+        
+        Return:
+        A dictionary with the keys and values from the yaml file
     """
     lines = yaml.splitlines()
     keyvals = [line.lstrip(' -').split(":") for line in lines if len(line) > 0]
     return { keyval[0] : keyval[1].lstrip() for keyval in keyvals if len(keyval) == 2}
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -32,10 +37,12 @@ if __name__ == "__main__":
         help="Print the commands that would be executed and exit")
 
     args = parser.parse_args()
-
-    # we print the command or run them depending on if this is a dry run
-    run_cmd = print if args.dry_run else subprocess.run
-
+    
+    # In A dry run we just print the arguments we pass to subprocess.run
+    if args.dry_run:
+        run_cmd = print
+    else:
+        run_cmd = subprocess.run
 
     with open(args.config) as config_file:
         config_raw = config_file.read()
@@ -60,9 +67,8 @@ if __name__ == "__main__":
         print(f"  Groups: {yaml_dict['groups']}")
         print(f"  Password Hash: {yaml_dict['passwd']}")
         run_cmd(["useradd",
-            "--comment", f"'{yaml_dict['gecos']}'",  
+            "--comment", yaml_dict['gecos'],  
             "--groups", yaml_dict['groups'],
             "--create-home",
-            "--password", f"'{yaml_dict['passwd']}'",
-            yaml_dict['name']            
-            ])
+            "--password", yaml_dict['passwd'],
+            yaml_dict['name']])
