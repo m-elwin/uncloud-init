@@ -35,6 +35,10 @@ if __name__ == "__main__":
     parser.add_argument("--dry-run",
         action="store_true",
         help="Print the commands that would be executed and exit")
+    parser.add_argument("--uninstall",
+        action="store_true",
+        help="Uninstall the uncloud-init package after running"
+        )
 
     args = parser.parse_args()
     
@@ -72,3 +76,5 @@ if __name__ == "__main__":
             "--create-home",
             "--password", yaml_dict['passwd'],
             yaml_dict['name']])
+    if args.uninstall:
+        run_cmd("apt-get purge -y uncloud-init")

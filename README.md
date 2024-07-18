@@ -32,4 +32,5 @@ Why not just uninstall cloud-init after the first job?
 never had those packages in the first place.  It's a tangled web, but cloud-init brings in netplan.io, and part of this build's goal is to avoid netplan.
 
 # Files:
-test/99-installer.cfg An example configuration file, used for testing
+- test/99-installer.cfg: An example configuration file, used for testing
+- uncloud-init.service: Systemd unit to run the uncloud-init service
