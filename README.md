@@ -31,3 +31,5 @@ Why not just uninstall cloud-init after the first job?
 1. The point of making a custom installer is to avoid  needing to uninstall packages after installation and instead start with a clean configuration that
 never had those packages in the first place.  It's a tangled web, but cloud-init brings in netplan.io, and part of this build's goal is to avoid netplan.
 
+# Files:
+test/99-installer.cfg An example configuration file, used for testing
