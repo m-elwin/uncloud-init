@@ -1,0 +1,9 @@
+__pycache__
+debian/files
+debian/uncloud-init
+debian/.debhelper
+debian/uncloud-init
+debian/*.log
+debian/debhelper-build-stamp
+debian/uncloud-init.postrm.debhelper
+debian/uncloud-init.substvars
