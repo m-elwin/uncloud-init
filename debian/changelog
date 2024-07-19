@@ -1,4 +1,10 @@
-uncloud-init (1.0) UNRELEASED; urgency=medium
+uncloud-init (1.0.1) noble; urgency=medium
+
+  * Removed conflict with cloud-init. 
+
+ -- Matthew Elwin <elwin@northwestern.edu>  Fri, 19 Jul 2024 18:14:43 -0500
+
+uncloud-init (1.0) noble; urgency=medium
 
   * Initial release. 
 
