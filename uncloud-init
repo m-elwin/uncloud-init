@@ -78,4 +78,5 @@ if __name__ == "__main__":
             "--shell", yaml_dict['shell'],
             yaml_dict['name']])
     if args.uninstall:
-        run_cmd("apt-get purge -y uncloud-init")
+        run_cmd(["rm", "-rf", "/etc/cloud"])
+        run_cmd(["apt-get", "purge", "-y", "uncloud-init"])
