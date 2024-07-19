@@ -36,7 +36,7 @@ never had those packages in the first place.  It's a tangled web, but cloud-init
 2. The debian build process creates files one directory up from the source tree.  Be aware when building.
 1. From within the source tree run `dpkg-source -b .` This must be done once.
 2. Then run `debuild -uc -us` to unofficially build the package and test it.
-
+3. To build the signed source package (for PPA uploading) run `debuild -k<keyid> -S`
 # Files:
 - test/99-installer.cfg: An example configuration file, used for testing
 - uncloud-init.service: Systemd unit to run the uncloud-init service
