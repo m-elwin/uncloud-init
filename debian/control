@@ -2,10 +2,12 @@ Source: uncloud-init
 Maintainer: Matthew Elwin <elwin@northwestern.edu>
 Section: admin
 Priority: optional
-Standards-Version: 4.6.2
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13)
 
 Package: uncloud-init
 Architecture: any
-Depends:
+Depends: python3, ${shlibs:Depends}, ${misc:Depends}
 Description: Replacement for cloud-init setup
- uncloud-init runs once when Ubuntu is first booted to setup the system. then uninstall itself.
+ uncloud-init runs once when Ubuntu is first booted to setup the system.
+ After running it will uninstall itself as it is no longer needed.

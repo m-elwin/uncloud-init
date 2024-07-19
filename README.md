@@ -31,6 +31,12 @@ Why not just uninstall cloud-init after the first job?
 1. The point of making a custom installer is to avoid  needing to uninstall packages after installation and instead start with a clean configuration that
 never had those packages in the first place.  It's a tangled web, but cloud-init brings in netplan.io, and part of this build's goal is to avoid netplan.
 
+# Building the Deb
+1. Install `devscripts`
+2. The debian build process creates files one directory up from the source tree.  Be aware when building.
+1. From within the source tree run `dpkg-source -b .` This must be done once.
+2. Then run `debuild -uc -us` to unofficially build the package and test it.
+
 # Files:
 - test/99-installer.cfg: An example configuration file, used for testing
 - uncloud-init.service: Systemd unit to run the uncloud-init service

@@ -26,7 +26,7 @@ def flat_parse_yaml(yaml):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        prog="uncloud-init.py",
+        prog="uncloud-init",
         description="Perform only the essential cloud-init steps needed for an Ubuntu Linux install")
     parser.add_argument("config",
         nargs="?",

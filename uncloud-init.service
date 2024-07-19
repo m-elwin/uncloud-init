@@ -4,4 +4,4 @@ After=dbus.service
 Wants=dbus.service
 
 [Service]
-ExecStart=/usr/sbin/uncloud-init.py --uninstall /etc/cloud/cloud.cfg.d/99-installer.cfg
+ExecStart=/usr/sbin/uncloud-init --uninstall /etc/cloud/cloud.cfg.d/99-installer.cfg
