@@ -75,6 +75,7 @@ if __name__ == "__main__":
             "--groups", yaml_dict['groups'],
             "--create-home",
             "--password", yaml_dict['passwd'],
+            "--shell", yaml_dict['shell'],
             yaml_dict['name']])
     if args.uninstall:
         run_cmd("apt-get purge -y uncloud-init")
