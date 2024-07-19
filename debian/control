@@ -11,3 +11,4 @@ Depends: python3, ${misc:Depends}
 Description: Replacement for cloud-init setup
  uncloud-init runs once when Ubuntu is first booted to setup the system.
  After running it will uninstall itself as it is no longer needed.
+Conflicts: cloud-init
