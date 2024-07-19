@@ -1,0 +1,11 @@
+Source: uncloud-init
+Maintainer: Matthew Elwin <elwin@northwestern.edu>
+Section: admin
+Priority: optional
+Standards-Version: 4.6.2
+
+Package: uncloud-init
+Architecture: any
+Depends:
+Description: Replacement for cloud-init setup
+ uncloud-init runs once when Ubuntu is first booted to setup the system. then uninstall itself.
